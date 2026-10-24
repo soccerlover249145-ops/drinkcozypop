@@ -18,6 +18,11 @@
 <link rel="preload" as="image" href="img/can/cherry-wrap.webp">
 <link rel="stylesheet" href="css/nav.css">
 <link rel="stylesheet" href="css/page.css">
+<style>
+/* Sign-up fallback note (until the Kit form is connected) */
+.form-err a,.status a{color:inherit;text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+#signup-bottom+.form-err{color:#fff}
+</style>
 </head>
 <body data-f="cherry">
 <a class="skip" href="#join">Skip to the sign-up</a>
@@ -31,7 +36,6 @@
     <a href="#flavors">Flavors</a>
     <a class="sub" href="#flavors" data-f="cherry">Tart Cherry Amaretto</a>
     <a class="sub" href="#flavors" data-f="caramel">Salted Caramel Cream</a>
-    <a href="#preorder">Pre-order</a>
     <a href="#extras">Caps and koozies</a>
     <a href="#founding">The Founding 1,000</a>
     <a href="#match">Which one are you?</a>
@@ -134,97 +138,6 @@
   <div class="row-dots" id="fl-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
 </section>
 
-<!-- ========== 4. PRE-ORDER + BACKERS ========== -->
-<div class="band-sec po-sec">
-  <div class="wave in" aria-hidden="true"><svg viewBox="0 0 2000 90" preserveAspectRatio="none"><path class="wv" fill="currentColor" d=""/></svg></div>
-  <section class="preorder" id="preorder" aria-labelledby="po-h">
-    <div class="head">
-      <p class="state" id="po-state"><span class="dot" aria-hidden="true"></span><span id="po-state-t">Opening soon. The list gets in 48 hours early.</span></p>
-      <h2 class="display" id="po-h">Pre-order your first cans.</h2>
-      <p>Pay ahead and your box comes from our very first run. Cancel for a full refund any time before it ships.</p>
-    </div>
-    <ol class="po-steps" aria-label="How a pre-order works">
-      <li><b>1</b>Pick your box</li>
-      <li><b>2</b>Pay today</li>
-      <li><b>3</b>Ships first, summer 2027</li>
-    </ol>
-    <div class="po-cards">
-      <article class="po-card rv">
-        <div class="ph"><img class="fsw" data-src-t="img/tray12-{f}.webp" src="img/tray12-cherry.webp" width="1000" height="1000" alt="A tray of twelve Cozypop cans" loading="lazy"></div>
-        <div class="bd">
-          <p class="tag">12 cans</p>
-          <h3 class="display">The 12-Pack</h3>
-          <p class="price"><b>$49.99</b><span>plus $9.99 shipping</span></p>
-          <ul>
-            <li>All one flavor, or a mix</li>
-            <li>A numbered Founding card in the box</li>
-            <li>Founder sticker and your name on the Founders Wall</li>
-          </ul>
-          <a class="pill po-btn" href="#join" data-po="CHECKOUT_LINK_12PACK" data-label="Pre-order the 12-Pack">Get my early invite</a>
-        </div>
-      </article>
-      <article class="po-card feature rv">
-        <span class="badge">Best value</span>
-        <div class="ph"><img src="img/club-box.webp" width="1000" height="1000" alt="An open Club Box of 24 Cozypop cans" loading="lazy"></div>
-        <div class="bd">
-          <p class="tag">24 cans</p>
-          <h3 class="display">Your first Club Box</h3>
-          <p class="price"><b>$99.98</b><span>shipping included, about $4.17 a can</span></p>
-          <ul>
-            <li>24 cans in the mix you pick</li>
-            <li>An Everyday Cozy Cap in the box</li>
-            <li>Money back if you don't love your first box</li>
-            <li>Skip or cancel before the next box. <a href="#faq-club" data-open="faq-club">How the Club works</a></li>
-          </ul>
-          <a class="pill hot po-btn" href="#join" data-po="CHECKOUT_LINK_CLUB" data-label="Pre-order a Club Box">Get my early invite</a>
-        </div>
-      </article>
-    </div>
-    <p class="po-count" id="po-count" hidden><b id="po-count-n"></b> <span id="po-count-t">boxes pre-ordered so far</span></p>
-
-    <div class="backers" id="join-in" aria-labelledby="backers-h">
-      <div class="bk-head">
-        <h3 class="display" id="backers-h">More ways to back us.</h3>
-        <p>Every option with cans ships at launch too.</p>
-      </div>
-      <div class="tiers" id="tiers" tabindex="0" aria-label="Backer options">
-        <article class="tier">
-          <span class="has none">No cans</span>
-          <div class="price display">$5</div>
-          <h4>Founding Spot</h4>
-          <ul><li>Your name on the Founders Wall</li><li>Founder sticker in your first order</li><li>Behind-the-scenes updates</li></ul>
-          <a class="pill back" href="/waitlist/" data-link="CHECKOUT_LINK_TIER_5">Back for $5</a>
-        </article>
-        <article class="tier">
-          <span class="has">4 cans</span>
-          <div class="price display">$30</div>
-          <h4>First Sip</h4>
-          <ul><li>A 4-pack of your choice, shipped at launch</li><li>Founder sticker</li><li>Name on the Founders Wall</li></ul>
-          <a class="pill back" href="/waitlist/" data-link="CHECKOUT_LINK_TIER_30">Back for $30</a>
-        </article>
-        <article class="tier">
-          <span class="has">8 cans</span>
-          <div class="price display">$75</div>
-          <h4>Founders Box</h4>
-          <ul><li>Numbered box: 8 cans, 2 of each flavor</li><li>Your name printed inside the box</li><li>A Cozy Cap, included</li><li>Everything in First Sip</li></ul>
-          <a class="pill back" href="/waitlist/" data-link="CHECKOUT_LINK_TIER_75">Back for $75</a>
-        </article>
-        <article class="tier">
-          <span class="has">8 cans</span>
-          <div class="price display">$150</div>
-          <h4>Flavor Council</h4>
-          <ul><li>Vote on every flavor and design decision</li><li>A video call with the founding team</li><li>Your name on the back of the first batch of cans</li><li>Everything in Founders Box</li></ul>
-          <a class="pill back" href="/waitlist/" data-link="CHECKOUT_LINK_TIER_150">Back for $150</a>
-        </article>
-      </div>
-      <div class="row-dots light" id="tier-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
-    </div>
-    <!-- CHECKOUT: paste each checkout link into CONFIG at the bottom of this file. Pre-orders: CHECKOUT_LINK_12PACK, CHECKOUT_LINK_CLUB, then set PREORDERS_OPEN:true. Backing: CHECKOUT_LINK_TIER_5, _30, _75, _150. Until then the buttons go to the list. -->
-    <p class="fine">A pre-order or backing is a purchase, not a share of the company. Anything with cans ships when we launch, with a full refund any time before it ships. <a href="/preorder-policy/">Pre-order and refund policy</a></p>
-  </section>
-  <div class="wave out" aria-hidden="true"><svg viewBox="0 0 2000 90" preserveAspectRatio="none"><path class="wv" fill="currentColor" d=""/></svg></div>
-</div>
-
 <!-- ========== 4b. LITTLE EXTRAS: caps and koozies ========== -->
 <section class="extras" id="extras" aria-labelledby="extras-h">
   <div class="head">
@@ -246,7 +159,7 @@
           <button type="button" data-k="everyday" aria-pressed="true"><b>Everyday</b><span>$12</span></button>
           <button type="button" data-k="sticker" aria-pressed="false"><b>Sticker Pop</b><span>$15</span></button>
         </div>
-        <a class="pill x-get" href="#preorder">Add one to my pre-order</a>
+        <a class="pill x-get" href="#join">Tell me at launch</a>
       </div>
     </article>
     <article class="x-card rv" id="x-wave" data-c="cherry">
@@ -267,11 +180,11 @@
           <button type="button" data-k="green" aria-pressed="false" style="--s:#0A4A22" aria-label="Green"></button>
         </div>
         <p class="x-price"><b>$14</b> for the set, or <b>$22</b> with an Everyday Cap</p>
-        <a class="pill x-get" href="#preorder">Add one to my pre-order</a>
+        <a class="pill x-get" href="#join">Tell me at launch</a>
       </div>
     </article>
   </div>
-  <p class="x-fine">Pick your cap and Wave Set at checkout when pre-orders open, or add them to any order later. Planned launch prices. Photos show our design samples.</p>
+  <p class="x-fine">Coming at launch. Planned launch prices. Photos show our design samples.</p>
 </section>
 
 <!-- ========== 5. THE FOUNDING 1,000 ========== -->
@@ -295,7 +208,7 @@
       <p class="cp-fc-note"></p>
     </div>
     <ul class="perks">
-      <li><b>First to pre-order</b><span>Your invite opens 48 hours before the rest of the list.</span></li>
+      <li><b>First in line</b><span>Your invite to order opens 48 hours before everyone else.</span></li>
       <li><b>A numbered Founding card</b><span>Printed with your Member No., tucked into your first box.</span></li>
       <li><b>First word from the taste nights</b><span>Every blind score, before we post it anywhere.</span></li>
     </ul>
@@ -380,7 +293,7 @@
       <li class="now"><span>Now</span>Getting the taste right</li>
       <li><span>Next</span>Blind taste tests</li>
       <li><span>Then</span>A small first batch</li>
-      <li><span>Then</span>Pre-orders</li>
+      <li><span>Then</span>Orders open</li>
       <li><span>2027</span>Launch, online first</li>
     </ol>
     <p class="rule"><b>Our one rule: 9 out of 10, or back to the kitchen.</b> Every flavor is tasted blind by at least 20 people who would buy it. Cups carry only numbers, so nobody is being polite.</p>
@@ -410,8 +323,8 @@
   <div class="pp-card">
     <div class="panel" role="tabpanel" id="p-host" aria-labelledby="t-host">
       <p>Have a few friends over and taste the flavors first. When the test batch is ready, hosts get the cans and score cards.</p>
-      <!-- HOST_FORM_URL: paste the Kit form action for tasting-night hosts into CONFIG. Until then this goes to /waitlist/. -->
-      <form class="mini" data-link="HOST_FORM_URL" action="/waitlist/" method="post" novalidate>
+      <!-- HOST_FORM_URL: paste the Kit form action for tasting-night hosts into CONFIG. Until then it offers a pre-filled email. -->
+      <form class="mini" data-link="HOST_FORM_URL" action="#" method="post" novalidate>
         <label for="host-email" class="sr">Email</label><input id="host-email" name="email_address" type="email" placeholder="you@email.com" autocomplete="email" required>
         <label for="host-city" class="sr">City</label><input id="host-city" name="fields[city]" type="text" placeholder="Your city" autocomplete="address-level2">
         <input type="hidden" name="fields[creator_source]" class="f-ref" value="">
@@ -421,8 +334,8 @@
     </div>
     <div class="panel" role="tabpanel" id="p-crew" aria-labelledby="t-crew" hidden>
       <p>Make videos, run a café, or own a shop your neighbors love? Tell us where to find you and we'll reach out when samples are ready.</p>
-      <!-- CREW_FORM_URL: paste the creators / Cozy Crew sign-up form action into CONFIG. Until then this goes to /waitlist/. -->
-      <form class="mini" data-link="CREW_FORM_URL" action="/waitlist/" method="post" novalidate>
+      <!-- CREW_FORM_URL: paste the creators / Cozy Crew sign-up form action into CONFIG. Until then it offers a pre-filled email. -->
+      <form class="mini" data-link="CREW_FORM_URL" action="#" method="post" novalidate>
         <label for="cr-email" class="sr">Email</label><input id="cr-email" name="email_address" type="email" placeholder="you@email.com" autocomplete="email" required>
         <label for="cr-handle" class="sr">Handle or shop name</label><input id="cr-handle" name="fields[handle]" type="text" placeholder="@handle or shop name">
         <input type="hidden" name="fields[creator_source]" class="f-ref" value="">
@@ -432,8 +345,8 @@
     </div>
     <div class="panel" role="tabpanel" id="p-store" aria-labelledby="t-store" hidden>
       <p>Name the shop or café where you'd like to find Cozypop. We count every request and bring the count when we ask a store to carry it. We share only the count, never your name or email.</p>
-      <!-- STORE_FORM_URL: paste the same Kit waitlist form action into CONFIG (see go-live/ask-your-store/README.md). Until then nothing is sent; the button only shows the thank-you. -->
-      <form class="sa-form" id="store-form" data-link="STORE_FORM_URL" action="/waitlist/" method="post" novalidate>
+      <!-- STORE_FORM_URL: paste the same Kit waitlist form action into CONFIG (see go-live/ask-your-store/README.md). Until then it offers a pre-filled email. -->
+      <form class="sa-form" id="store-form" data-link="STORE_FORM_URL" action="#" method="post" novalidate>
         <label for="sa-store" class="sr">Store or café</label><input id="sa-store" name="fields[store_name]" type="text" maxlength="80" placeholder="Store or café" autocomplete="off" required>
         <label for="sa-city" class="sr">City</label><input id="sa-city" name="fields[store_city]" type="text" maxlength="60" placeholder="City" autocomplete="address-level2" required>
         <label for="sa-email" class="sr">Email, optional</label><input id="sa-email" name="email_address" type="email" placeholder="Email (optional, to hear if they say yes)" autocomplete="email">
@@ -450,18 +363,17 @@
 <section class="faq" id="faq" aria-labelledby="faq-h">
   <h2 class="display" id="faq-h">Questions</h2>
   <div class="list">
-    <details><summary>When can I get it?<i aria-hidden="true"></i></summary><p>We're aiming for 2027. People on the list and backers get in before anyone else.</p></details>
+    <details><summary>When can I get it?<i aria-hidden="true"></i></summary><p>We're aiming for 2027. People on the list get in before anyone else.</p></details>
     <details><summary>How much will it cost?<i aria-hidden="true"></i></summary><p>A 12-Pack is $49.99, about $4.17 a can, and shop orders ship for $9.99. A Club Box is 24 cans for $99.98 with shipping included. 4-packs and a numbered Founders Box arrive at launch too. Prices aren't final yet.</p></details>
     <details id="faq-club"><summary>How does the Cozypop Club work?<i aria-hidden="true"></i></summary><p>Our subscription, opening at launch. Pick a mix and get 24 cans every 4 or 8 weeks for $99.98, shipping included. Your first three boxes each carry a gift: an Everyday Cozy Cap, then a Wave coaster, then a Sticker Pop cap. Your first box has a money-back guarantee, one per household. Members get first pick of new flavors and a vote on what's next, and can swap, skip or pause anytime.</p></details>
     <details><summary>Where will it be sold?<i aria-hidden="true"></i></summary><p>Online first, shipped to your door. Then stores, one city at a time.</p></details>
-    <details><summary>What's a Cozy Cap?<i aria-hidden="true"></i></summary><p>A cap that snaps onto your can, with a slide-open sip hole. Set it down, come back to it later. The Everyday cap is $12 and the sticker-covered Sticker Pop is $15. Founding pre-orders include one.</p></details>
+    <details><summary>What's a Cozy Cap?<i aria-hidden="true"></i></summary><p>A cap that snaps onto your can, with a slide-open sip hole. Set it down, come back to it later. The Everyday cap is $12 and the sticker-covered Sticker Pop is $15. Founding members get one in their first box.</p></details>
     <details><summary>How do I move up the list?<i aria-hidden="true"></i></summary><p>Share your link. Each friend who joins moves you up 50 spots, and the rewards stack. See the ladder at the bottom of this page. A friend counts once they confirm their email.</p></details>
     <details><summary>Is there alcohol or caffeine in it?<i aria-hidden="true"></i></summary><p>Neither. Amaretto is the name of the almond flavor, and every Cozypop is non-alcoholic. Every flavor is caffeine-free too.</p></details>
     <details><summary>Is it dairy-free or vegan?<i aria-hidden="true"></i></summary><p>No. The protein is whey, which comes from milk. It's clear and light, but it does contain milk.</p></details>
     <details><summary>What allergens are in it?<i aria-hidden="true"></i></summary><p>Milk, from the whey. The almond note in Tart Cherry Amaretto comes from flavoring, and we'll confirm with our factory whether any tree nuts are involved before launch. Every can lists its allergens.</p></details>
     <details><summary>How is it sweetened?<i aria-hidden="true"></i></summary><p>A little real fruit, honey or cane sugar, plus monk fruit and stevia leaf extract. About 4 grams of sugar a can.</p></details>
     <details><summary>Who is it for?<i aria-hidden="true"></i></summary><p>Grown-ups. Cozypop is made for adults, not kids. Like any protein drink, check the label and ask your doctor if you're unsure.</p></details>
-    <details><summary>Can I cancel a pre-order?<i aria-hidden="true"></i></summary><p>Yes, for a full refund any time before your order ships. Details in our <a href="/preorder-policy/">pre-order and refund policy</a>.</p></details>
   </div>
 </section>
 </main>
@@ -500,7 +412,7 @@
       <p class="ladder-sub">After you sign up you get your own link. Each friend who joins moves you up 50 spots, and the rewards stack.</p>
       <ol class="ladder">
         <li><span class="n display">1</span><span><b>A double vote</b>Your flavor vote counts twice.</span></li>
-        <li><span class="n display">3</span><span><b>The first wave</b>Your pre-order invite comes 48 hours early.</span></li>
+        <li><span class="n display">3</span><span><b>The first wave</b>Your invite to order comes 48 hours early.</span></li>
         <li><span class="n display">5</span><span><b>An Everyday Cozy Cap on us</b>Tucked into your first box.</span></li>
         <li><span class="n display">10</span><span><b>Sticker Pop, Plus One edition</b>A cap you can't buy, and a gold star on the Founders Wall.</span></li>
         <li><span class="n display">25</span><span><b>A 4-pack on us</b>Your pick, in your first box, and a say in the seasonal shortlist.</span></li>
@@ -516,7 +428,6 @@
     <span class="logo-mark" aria-hidden="true"></span>
     <span>Your little evening treat. Made in the open by a small team.</span>
     <span>drinkcozypop.com · @drinkcozypop</span>
-    <nav class="legal" aria-label="Policies"><a href="/terms/">Terms</a><a href="/preorder-policy/">Pre-order and refund policy</a><a href="/privacy/">Privacy</a><a href="/shipping/">Shipping</a><a href="/crew-terms/">Cozy Crew terms</a></nav>
   </div>
 </footer>
 
@@ -545,7 +456,7 @@ var CONFIG={
 
   /* ===== WAITLIST + REFERRALS (v47). Paste on trademark-filing day. See coming-soon-v47-waitlist/setup-checklist.md.
      Both blank = DEMO MODE: nothing is sent anywhere, the thank-you shows a sample link marked "Demo".
-     (On drinkcozypop.com itself blank IDs never show a demo: the button sends people to /waitlist/, as in v46.)
+     (On drinkcozypop.com itself blank IDs never show a demo: sign-ups offer a pre-filled email instead.)
      No secrets go here. Both values are public form IDs that anyone can see in a page's code.
      NEVER paste a LaunchList API key (starts llk_) or a Kit API key/secret. The page refuses an llk_ value. */
   KIT_FORM_ID:'',                   /* Kit > Grow > Landing Pages & Forms > "Cozypop waitlist" > Publish > HTML: the digits in action="https://app.kit.com/forms/1234567/subscriptions". Example: '1234567' */
@@ -560,6 +471,39 @@ var CONFIG={
   UNLOCKED:[],                      /* Waitlist unlocks reached, by real confirmed sign-ups, e.g. [1000]. */
   CARD_FROM_LINK:true               /* Thank-you card: show the Member No. from ?n= (the welcome email link). false always shows the dots. */
 };
+</script>
+<script>
+/* Until CONFIG has a Kit or LaunchList ID, no form on the live site can save an email. This runs before js/page.js
+   and, only in that case, shows an honest note with a pre-filled email instead of a dead page or a fake thank-you.
+   Once KIT_FORM_ID (or a form URL) is set, it steps aside and page.js handles the form as normal. */
+(function(){
+  var HELLO='drinkcozypop@gmail.com', RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function has(v){return /^https:\/\//.test(String(v||''));}
+  var listOn=/^\d{3,12}$/.test(String(CONFIG.KIT_FORM_ID||'').trim())||/^frm_/.test(String(CONFIG.LAUNCHLIST_FORM_ID||'').trim());
+  function note(box,email,subj){
+    var a=document.createElement('a');
+    a.href='mailto:'+HELLO+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(email?'Please add '+email+'.':'Hello!');
+    a.textContent=HELLO;
+    box.textContent='Our sign-up opens in a few days. For now, email ';
+    box.appendChild(a); box.appendChild(document.createTextNode(' and we’ll add you by hand.'));
+  }
+  document.addEventListener('submit',function(e){
+    var f=e.target, box, subj, em=f.querySelector('input[type=email]'), v=em?em.value.trim():'';
+    if(f.classList.contains('signup')){ if(listOn) return; box=f.nextElementSibling; subj='Add me to the Cozypop list'; }
+    else if(f.classList.contains('mini')){ if(has(CONFIG[f.getAttribute('data-link')])) return; box=f.parentNode.querySelector('.status');
+      subj=f.getAttribute('data-link')==='HOST_FORM_URL'?'I want to host a Cozypop tasting night':'I want to join the Cozy Crew'; }
+    else if(f.id==='store-form'){ if(has(v?CONFIG.STORE_FORM_URL:CONFIG.STORE_COUNT_URL)) return; box=f.querySelector('.sa-status');
+      var st=f.querySelector('#sa-store').value.trim(), ct=f.querySelector('#sa-city').value.trim();
+      e.preventDefault(); e.stopPropagation();
+      if(!st||!ct){ box.textContent=!st?'Tell us the store or café.':'Tell us the city.'; return; }
+      return note(box,v,'Please carry Cozypop at '+st+' in '+ct);
+    } else return;
+    e.preventDefault(); e.stopPropagation();
+    if(!box) return;
+    if(!RE.test(v)){ box.textContent='Enter an email like you@email.com'; if(em) em.focus(); return; }
+    note(box,v,subj);
+  },true);
+})();
 </script>
 <script src="js/nav.js"></script>
 <script src="js/stage.js"></script>
