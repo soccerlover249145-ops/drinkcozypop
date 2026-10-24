@@ -278,10 +278,10 @@ function kitSend(url,data){
 /* Styles for the check window, and the reCAPTCHA note Google asks for (its corner badge is hidden). */
 (function(){ if(!KIT_ID) return;
   var c=document.createElement('style');
-  c.textContent='.kg{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:16px;background:rgba(36,18,26,.55)}'+
-    '.kg-box{width:min(420px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:#FFF8F2;color:#2A1620;border-radius:22px;padding:22px 20px 16px;display:grid;gap:8px;box-shadow:0 20px 60px rgba(0,0,0,.3)}'+
+  c.textContent='.kg{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:8px;background:rgba(36,18,26,.55)}'+
+    '.kg-box{width:min(420px,100%);max-height:calc(100dvh - 16px);overflow:auto;background:#FFF8F2;color:#2A1620;border-radius:22px;padding:22px 20px 16px;display:grid;gap:8px;box-shadow:0 20px 60px rgba(0,0,0,.3)}'+
     '.kg-h{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:24px;margin:0}'+
-    '.kg iframe{width:100%;height:440px;border:0;border-radius:12px;background:#fff}'+
+    '.kg iframe{width:calc(100% + 40px);margin-inline:-20px;height:440px;border:0;background:#fff}'+
     '.kg-x{justify-self:center;background:none;border:0;color:inherit;font:600 15px Figtree,system-ui,sans-serif;text-decoration:underline;padding:8px 12px;cursor:pointer}'+
     '.grecaptcha-badge{visibility:hidden}footer .rc{font-size:12px;opacity:.75;grid-column:1/-1}footer .rc a{color:inherit}';
   document.head.appendChild(c);
