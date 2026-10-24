@@ -451,8 +451,8 @@ var CONFIG={
   CHECKOUT_LINK_TIER_30:'CHECKOUT_LINK_TIER_30',
   CHECKOUT_LINK_TIER_75:'CHECKOUT_LINK_TIER_75',
   CHECKOUT_LINK_TIER_150:'CHECKOUT_LINK_TIER_150',
-  HOST_FORM_URL:'HOST_FORM_URL',
-  CREW_FORM_URL:'CREW_FORM_URL',
+  HOST_FORM_URL:'https://app.kit.com/forms/10089586/subscriptions',
+  CREW_FORM_URL:'https://app.kit.com/forms/10089586/subscriptions',
   REFERRAL_EMBED:'REFERRAL_EMBED',  /* v47: leave as is. The waitlist below talks to LaunchList directly, no embed script needed. */
 
   /* ===== WAITLIST + REFERRALS (v47). Paste on trademark-filing day. See coming-soon-v47-waitlist/setup-checklist.md.
@@ -460,11 +460,11 @@ var CONFIG={
      (On drinkcozypop.com itself blank IDs never show a demo: sign-ups offer a pre-filled email instead.)
      No secrets go here. Both values are public form IDs that anyone can see in a page's code.
      NEVER paste a LaunchList API key (starts llk_) or a Kit API key/secret. The page refuses an llk_ value. */
-  KIT_FORM_ID:'',                   /* Kit > Grow > Landing Pages & Forms > "Cozypop waitlist" > Publish > HTML: the digits in action="https://app.kit.com/forms/1234567/subscriptions". Example: '1234567' */
+  KIT_FORM_ID:'10089586',                   /* Kit > Grow > Landing Pages & Forms > "Cozypop waitlist" > Publish > HTML: the digits in action="https://app.kit.com/forms/1234567/subscriptions". Example: '1234567' */
   LAUNCHLIST_FORM_ID:'',            /* LaunchList > Embed & API > Your website: the public form ID. Example: 'frm_8Kd2Qm4Rp9' */
   REFERRAL_PARAM:'ref',             /* The share-link parameter: drinkcozypop.com/?ref=CODE. Keep 'ref' (creator links in go-live/ref-codes.csv use it too). */
 
-  STORE_FORM_URL:'STORE_FORM_URL',  /* Ask your store, with email: the same Kit waitlist form action */
+  STORE_FORM_URL:'https://app.kit.com/forms/10089586/subscriptions',  /* Ask your store, with email: the same Kit waitlist form action */
   STORE_COUNT_URL:'STORE_COUNT_URL', /* Ask your store, no email: a free no-email form (TODO, see README) */
   SHARE_URL:'https://drinkcozypop.com', /* The link people share. Personal links are this plus ?ref=CODE. */
   FOUNDING_SPOTS_TAKEN:null,        /* Founding counter. Highest Member No. given out, confirmed sign-ups only, whole number, no quotes. null keeps it hidden. Never a guess. */
