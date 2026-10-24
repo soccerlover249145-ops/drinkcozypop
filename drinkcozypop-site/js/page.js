@@ -216,9 +216,85 @@ function llCapture(email,f){
     });
   },function(e){ if(e&&e.msg) throw e; throw {msg:MSG_NET}; });
 }
+/* Kit: send the way Kit's own form script does (a reCAPTCHA token plus the page address) and read Kit's answer.
+   "success" = on the list. "quarantined" = Kit wants a quick I'm-not-a-robot check: it opens in a small window here,
+   and the sign-up only counts once Kit says it's confirmed. Without this step Kit quietly drops the sign-up. */
+var KIT_RC='6LdkIV0UAAAAABtNVAAP99TC6f_18LiETnPK6ziX', rcP=null;
+var MSG_CHECK='Almost there: the quick check didn’t finish. Press the button again to try once more.';
+function isKitURL(u){return /^https:\/\/app\.(kit|convertkit)\.com\//.test(String(u||''));}
+function rcLoad(){
+  if(!rcP) rcP=new Promise(function(ok){
+    var s=document.createElement('script'); s.src='https://www.google.com/recaptcha/api.js?render='+KIT_RC; s.async=true;
+    s.onload=function(){ try{ grecaptcha.ready(function(){ok(true);}); }catch(e){ok(false);} };
+    s.onerror=function(){ok(false);}; document.head.appendChild(s); setTimeout(function(){ok(false);},8000);
+  });
+  return rcP;
+}
+function rcToken(){
+  return rcLoad().then(function(on){
+    if(!on||!window.grecaptcha) return '';
+    return Promise.race([grecaptcha.execute(KIT_RC,{action:'formsubmit'}),new Promise(function(r){setTimeout(function(){r('');},6000);})]);
+  }).catch(function(){return '';});
+}
+function kitGuard(url){
+  return new Promise(function(ok,no){
+    var back=document.activeElement, w=document.createElement('div'); w.className='kg';
+    w.innerHTML='<div class="kg-box" role="dialog" aria-modal="true" aria-labelledby="kg-h"><p class="kg-h" id="kg-h">One quick check</p>'+
+      '<iframe title="Security check"></iframe>'+
+      '<button type="button" class="kg-x">Cancel</button></div>';
+    var fr=w.querySelector('iframe'), x=w.querySelector('.kg-x');
+    function end(){ window.removeEventListener('message',msg); document.removeEventListener('keydown',key); w.remove(); if(back&&back.focus) back.focus(); }
+    function msg(e){
+      var h=''; try{h=new URL(e.origin).hostname;}catch(_){}
+      if(!/(^|\.)(kit|convertkit)\.com$/.test(h)) return;
+      var d=e.data||{};
+      if(d.name==='ckjs:guard:size'&&d.height) fr.style.height=Math.min(Math.max(+d.height,120),600)+'px';
+      if(d.name==='ckjs:guard:confirmed'){ end(); ok({status:'success'}); }
+    }
+    function key(e){ if(e.key==='Escape'){ end(); no({msg:MSG_CHECK}); } }
+    x.onclick=function(){ end(); no({msg:MSG_CHECK}); };
+    window.addEventListener('message',msg); document.addEventListener('keydown',key);
+    fr.src=url; document.body.appendChild(w); x.focus();
+  });
+}
+function kitSend(url,data){
+  return rcToken().then(function(t){
+    data.append('token',t); data.append('referrer',document.referrer); data.append('host',location.href);
+    data.append('search',location.search); data.append('ckjs_version','6');
+    return fetch(url,{method:'POST',body:data,headers:{'Accept':'application/json'}});
+  }).then(function(res){
+    return res.json().catch(function(){return {};}).then(function(j){
+      if(j.status==='success'){
+        if(j.consent&&j.consent.enabled&&isKitURL(j.consent.url)) return kitGuard(j.consent.url).catch(function(){return j;});
+        return j;
+      }
+      if(j.status==='quarantined'&&isKitURL(j.url)) return kitGuard(j.url);
+      if(res.status===429) throw {msg:'Lots of people are joining right now. Please try again in a minute.'};
+      if(res.status>=500||res.status===0) throw {msg:MSG_NET};
+      throw {msg:'That didn’t go through. Check the email for typos and try again.'};
+    });
+  },function(e){ if(e&&e.msg) throw e; throw {msg:MSG_NET}; });
+}
+/* Styles for the check window, and the reCAPTCHA note Google asks for (its corner badge is hidden). */
+(function(){ if(!KIT_ID) return;
+  var c=document.createElement('style');
+  c.textContent='.kg{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:16px;background:rgba(36,18,26,.55)}'+
+    '.kg-box{width:min(420px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:#FFF8F2;color:#2A1620;border-radius:22px;padding:22px 20px 16px;display:grid;gap:8px;box-shadow:0 20px 60px rgba(0,0,0,.3)}'+
+    '.kg-h{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:24px;margin:0}'+
+    '.kg iframe{width:100%;height:440px;border:0;border-radius:12px;background:#fff}'+
+    '.kg-x{justify-self:center;background:none;border:0;color:inherit;font:600 15px Figtree,system-ui,sans-serif;text-decoration:underline;padding:8px 12px;cursor:pointer}'+
+    '.grecaptcha-badge{visibility:hidden}footer .rc{font-size:12px;opacity:.75;grid-column:1/-1}footer .rc a{color:inherit}';
+  document.head.appendChild(c);
+  var ft=document.querySelector('footer .in'); if(!ft) return;
+  var n=document.createElement('span'); n.className='rc';
+  n.innerHTML='Sign-ups are protected by reCAPTCHA. Google’s <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a> apply.';
+  ft.appendChild(n);
+})();
+/* Load reCAPTCHA only once someone starts typing in a sign-up, so the page itself stays fast. */
+document.addEventListener('focusin',function(e){ var f=e.target&&e.target.form; if(KIT_ID&&f&&(f.matches('form.signup.kit,form.mini,#store-form'))) rcLoad(); });
 function kitPost(f,code){
   var data=new FormData(f); if(code) data.set('fields[referral_code]',code);
-  return fetch('https://app.kit.com/forms/'+KIT_ID+'/subscriptions',{method:'POST',body:data,mode:'no-cors'});
+  return kitSend('https://app.kit.com/forms/'+KIT_ID+'/subscriptions',data);
 }
 document.querySelectorAll('form.signup.kit').forEach(function(f){
   var err=f.nextElementSibling&&f.nextElementSibling.classList.contains('form-err')?f.nextElementSibling:null;
@@ -237,8 +313,8 @@ document.querySelectorAll('form.signup.kit').forEach(function(f){
     step.then(function(r){
       if(DEMO) return r;
       if(!KIT_ID) return r;
-      /* Kit answers opaquely (no-cors). A network failure here is the only error we can see. */
-      return kitPost(f,r.code).then(function(){return r;},function(){ if(LL_ID&&r.code) return r; throw {msg:MSG_NET}; });
+      /* Kit says yes, asks for the quick check, or says no. Only a real yes shows the thank-you. */
+      return kitPost(f,r.code).then(function(){return r;},function(x){ if(LL_ID&&r.code) return r; throw x; });
     }).then(function(r){ showDone(f,r); },fail);
   });
 });
@@ -255,9 +331,10 @@ document.querySelectorAll('form.mini').forEach(function(f){
     var input=f.querySelector('input[type=email]');
     if(!EMAIL_RE.test(input.value.trim())){ st.textContent='Enter an email like you@email.com'; input.focus(); return; }
     var b=f.querySelector('button'); b.disabled=true;
-    fetch(f.action,{method:'POST',body:new FormData(f),mode:'no-cors'})
-      .then(function(){st.textContent="Thanks, we'll be in touch."; f.reset(); b.disabled=false;})
-      .catch(function(){b.disabled=false; f.submit();});
+    st.textContent='';
+    var send=isKitURL(f.action)?kitSend(f.action,new FormData(f)):fetch(f.action,{method:'POST',body:new FormData(f),mode:'no-cors'});
+    send.then(function(){st.textContent="Thanks, we'll be in touch."; f.reset(); b.disabled=false;},
+      function(x){b.disabled=false; st.textContent=(x&&x.msg)||MSG_NET;});
   });
 });
 
@@ -277,7 +354,8 @@ document.querySelectorAll('form.mini').forEach(function(f){
     if(!url||!window.fetch){done(); return;}
     var data=new FormData(f); if(!ev) data.delete('email_address');
     b.disabled=true;
-    fetch(url,{method:'POST',body:data,mode:'no-cors'}).then(done).catch(function(){st.textContent='That did not go through. Please try again in a moment.';}).then(function(){b.disabled=false;});
+    (isKitURL(url)?kitSend(url,data):fetch(url,{method:'POST',body:data,mode:'no-cors'}))
+      .then(done,function(x){st.textContent=(x&&x.msg)||'That did not go through. Please try again in a moment.';}).then(function(){b.disabled=false;});
   });
 })();
 
